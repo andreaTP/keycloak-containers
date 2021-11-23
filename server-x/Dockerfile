@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8-minimal AS build-env
+FROM registry.access.redhat.com/ubi8-minimal@sha256:16da4d4c5cb289433305050a06834b7328769f8a5257ad5b4a5006465a0379ff AS build-env
 
 ENV KEYCLOAK_VERSION 15.0.0
 ARG KEYCLOAK_DIST=https://github.com/keycloak/keycloak/releases/download/$KEYCLOAK_VERSION/keycloak.x-preview-$KEYCLOAK_VERSION.tar.gz
@@ -17,7 +17,7 @@ RUN mv /tmp/keycloak/keycloak.x* /opt/keycloak
     
 COPY tools /opt/keycloak/tools
 
-FROM registry.access.redhat.com/ubi8-minimal
+FROM registry.access.redhat.com/ubi8-minimal@sha256:16da4d4c5cb289433305050a06834b7328769f8a5257ad5b4a5006465a0379ff
 
 COPY --from=build-env /opt/keycloak /opt/keycloak
 COPY probes /probes
